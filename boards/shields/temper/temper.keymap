@@ -40,12 +40,6 @@
             bindings = <&kp BACKSPACE>, <&kp LA(BACKSPACE)>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        smart_shft: smart_shift {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp LSHFT>, <&caps_word>;
-            mods = <(MOD_LSFT)>;
-        };
         comma_semi: comma_semi {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -77,6 +71,60 @@
             mods = <(MOD_LSFT)>;
         };
     };
+    combos {
+        compatible = "zmk,combos";
+
+        // Left hand combos remain the same
+        shift_left {
+            bindings = <&kp LSFT>;
+            timeout-ms = <50>;
+            key-positions = <RC(1,0) RC(2,0)>;  // A + Z
+        };
+
+        ctrl_left {
+            bindings = <&kp LCTL>;
+            timeout-ms = <50>;
+            key-positions = <RC(1,1) RC(2,1)>;  // R + X
+        };
+
+        alt_left {
+            bindings = <&kp LALT>;
+            timeout-ms = <50>;
+            key-positions = <RC(1,2) RC(2,2)>;  // S + C
+        };
+
+        gui_left {
+            bindings = <&kp LGUI>;
+            timeout-ms = <50>;
+            key-positions = <RC(1,3) RC(2,3)>;  // T + D
+        };
+
+        // Updated right hand combos
+        shift_right {
+            bindings = <&kp RSFT>;
+            timeout-ms = <50>;
+            key-positions = <RC(1,9) RC(0,9)>;  // O + Apostrophe (?)
+        };
+
+        ctrl_right {
+            bindings = <&kp RCTL>;
+            timeout-ms = <50>;
+            key-positions = <RC(0,6) RC(1,6)>;  // L + N (unchanged)
+        };
+
+        alt_right {
+            bindings = <&kp RALT>;
+            timeout-ms = <50>;
+            key-positions = <RC(0,7) RC(1,7)>;  // U + E (unchanged)
+        };
+
+        gui_right {
+            bindings = <&kp RGUI>;
+            timeout-ms = <50>;
+            key-positions = <RC(1,6) RC(2,6)>;  // N + H
+        };
+    };
+
         keymap {
                 compatible = "zmk,keymap";
 
@@ -89,7 +137,7 @@
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
         &kp Z         &kp X         &kp C         &kp D         &kp V             &kp K         &kp H      &comma_semi    &dot_colon    &qmrk_excl
 // ╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
-                                   &mo CMD       &mo NUM     &smart_shft        &kp SPACE      &mo NAV     &to DEFAULT
+                                   &kp BSPC       &kp NUM     &kp SHIFT         &kp SPACE      &kp RET       &kp DEL
 //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
                         >;
                 };
@@ -123,11 +171,11 @@
                 nav_layer {
                         bindings = <
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-        ______        ______        ______        ______        ______           &kp DEL       &kp HOME      &kp END       &kp TAB       &kp BSPC
+        ______        ______        ______        ______        ______           &kp HOME      &kp END      &kp TAB       &kp BSPC        ______ 
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-      &sk LSHFT     &sk LCTRL      &sk LALT      &sk LGUI       ______           &kp LEFT      &kp DOWN       &kp UP      &kp RIGHT       &gresc
+      &sk LSHFT     &sk LCTRL      &sk LALT      &sk LGUI       ______           &gresc        &kp LEFT     &kp DOWN      &kp UP        &kp RIGHT
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-        ______        ______        ______        ______        ______            ______        &kp RET       ______        ______        ______
+        ______        ______        ______        ______        ______           &kp INS       &kp HOME    &kp PG_DOWN    &kp PG_UP      &kp END
 // ╰─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────╯
                                     ______        ______        ______            ______        ______        ______
 //                             ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
