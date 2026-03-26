@@ -66,7 +66,7 @@ layers:
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
   num:
-  - - '~'
+  - - {t: '`', s: '~'}
     - '@'
     - '{'
     - '}'
